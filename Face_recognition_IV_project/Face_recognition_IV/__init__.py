@@ -50,3 +50,12 @@ class FaceRecognitionSystem:
         self.users = self.load_users_config()
         
         print("🚀 Face Recognition System initialized!")
+
+    def create_directories(self):
+        directories = [self.data_dir, self.screenshots_dir]
+        
+        for directory in directories:
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+                print(f"📁 Created directory: {directory}")
+    
