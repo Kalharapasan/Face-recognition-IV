@@ -31,3 +31,5 @@ def check_libraries():
     
     print("✅ All libraries are available!")
     return True
+
+class FaceRecognitionSystem:
