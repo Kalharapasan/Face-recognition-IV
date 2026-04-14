@@ -2,7 +2,7 @@
 name = "Face_recognition_IV"
 version = "1.0.0"
 description = "" #TODO: Add a short description of your package
-authors = [{name = "Your Name", email = "your@email.com"}] #TODO: Add your name and email
+authors = [{name = "P.R.P.S.Kalhara", email = "kalharap84@gmail.com.com"}] #TODO: Add your name and email
 requires-python = ">=3.9"
 dynamic = ["optional-dependencies"]
 
