@@ -1,9 +1,61 @@
-# TODO: Update the main function to your needs or remove it.
+#!/usr/bin/env python3
+import cv2
+import numpy as np
+from PIL import Image
+import os
+import json
+from datetime import datetime
 
+def check_libraries():
+    """Check if all required libraries are installed"""
+    print("🔍 Checking required libraries...")
+    
+    try:
+        print(f"✅ OpenCV: {cv2.__version__}")
+    except ImportError:
+        print("❌ OpenCV not found. Install with: pip install opencv-python")
+        return False
+    
+    try:
+        print(f"✅ NumPy: {np.__version__}")
+    except ImportError:
+        print("❌ NumPy not found. Install with: pip install numpy")
+        return False
+    
+    try:
+        from PIL import Image
+        print("✅ PIL/Pillow: Available")
+    except ImportError:
+        print("❌ PIL not found. Install with: pip install Pillow")
+        return False
+    
+    print("✅ All libraries are available!")
+    return True
 
-def main() -> None:
-    print("Start coding in Python today!")
+class FaceRecognitionSystem:
+    def __init__(self):
+        self.data_dir = "data"
+        self.model_path = "face_recognizer_model.xml"
+        self.users_config = "users.json"
+        self.screenshots_dir = "screenshots"
+        
+        self.face_classifier = cv2.CascadeClassifier(
+            cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+        )
+        
+        self.recognizer = None
 
+        self.create_directories()
+        
+        self.users = self.load_users_config()
+        
+        print("🚀 Face Recognition System initialized!")
 
-if __name__ == "__main__":
-    main()
+    def create_directories(self):
+        directories = [self.data_dir, self.screenshots_dir]
+        
+        for directory in directories:
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+                print(f"📁 Created directory: {directory}")
+    
