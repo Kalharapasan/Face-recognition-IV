@@ -33,3 +33,20 @@ def check_libraries():
     return True
 
 class FaceRecognitionSystem:
+    def __init__(self):
+        self.data_dir = "data"
+        self.model_path = "face_recognizer_model.xml"
+        self.users_config = "users.json"
+        self.screenshots_dir = "screenshots"
+        
+        self.face_classifier = cv2.CascadeClassifier(
+            cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+        )
+        
+        self.recognizer = None
+
+        self.create_directories()
+        
+        self.users = self.load_users_config()
+        
+        print("🚀 Face Recognition System initialized!")
