@@ -110,3 +110,5 @@ class FaceRecognitionSystem:
             for user_id, name in self.users.items():
                 print(f"  ID: {user_id} - Name: {name}")
         print()
+    
+    
