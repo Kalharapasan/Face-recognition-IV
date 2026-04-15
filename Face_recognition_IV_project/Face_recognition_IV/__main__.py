@@ -371,4 +371,8 @@ class FaceRecognitionSystem:
             name = self.users.get(str(user_id), f"User {user_id}")
             print(f"   👤 {name} (ID: {user_id}): {count} samples")
         
+        # Create and train the recognizer
+        print("🔄 Training LBPH Face Recognizer...")
         
+        self.recognizer = cv2.face.LBPHFaceRecognizer_create()
+        self.recognizer.train(faces, labels)
