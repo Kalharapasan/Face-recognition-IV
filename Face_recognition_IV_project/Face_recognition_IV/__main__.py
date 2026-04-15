@@ -219,4 +219,18 @@ class FaceRecognitionSystem:
                 print("❌ Error: Cannot read frame")
                 break
 
+            # Create display frame
+            display_frame = frame.copy()
+            
+            # Add information overlay
+            cv2.putText(display_frame, f"User: {user_name} (ID: {user_id})", (10, 30),
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+            cv2.putText(display_frame, f"Samples: {img_count}/{num_samples}", (10, 60),
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+            cv2.putText(display_frame, "Press 'q' to quit", (10, 90),
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
+            
+            # Show original frame
+            cv2.imshow("📸 Data Collection - Camera Feed", display_frame)
+
             
