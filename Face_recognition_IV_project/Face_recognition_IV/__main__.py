@@ -376,3 +376,15 @@ class FaceRecognitionSystem:
         
         self.recognizer = cv2.face.LBPHFaceRecognizer_create()
         self.recognizer.train(faces, labels)
+
+        # Save the trained model
+        self.recognizer.write(self.model_path)
+        
+        print(f"✅ Model training completed successfully!")
+        print(f"💾 Model saved as: {self.model_path}")
+        
+        # Show model file info
+        model_size = os.path.getsize(self.model_path) / 1024  # KB
+        print(f"📊 Model file size: {model_size:.1f} KB")
+        
+        return True
