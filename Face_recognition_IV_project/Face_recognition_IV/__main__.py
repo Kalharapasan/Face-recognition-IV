@@ -146,3 +146,39 @@ class FaceRecognitionSystem:
         x, y, w, h = faces[0]
         cropped_face = img[y:y+h, x:x+w]
         return cropped_face
+    
+    def test_camera(self):
+        print("📹 Testing camera...")
+        
+        cap = cv2.VideoCapture(0)
+        if not cap.isOpened():
+            print("❌ Error: Cannot access camera")
+            return False
+        
+        print("✅ Camera accessible")
+        print("📸 Press any key to take test photo, 'q' to quit")
+        
+        while True:
+            ret, frame = cap.read()
+            if not ret:
+                print("❌ Error: Cannot read frame")
+                break
+            
+            # Add text overlay
+            cv2.putText(frame, "Camera Test - Press any key", (10, 30),
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+            
+            cv2.imshow("Camera Test", frame)
+            
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord('q'):
+                break
+            elif key != 255:  # Any other key pressed
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                filename = f"camera_test_{timestamp}.jpg"
+                cv2.imwrite(filename, frame)
+                print(f"📸 Test photo saved: {filename}")
+        
+        cap.release()
+        cv2.destroyAllWindows()
+        return True
