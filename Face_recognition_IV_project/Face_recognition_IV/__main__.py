@@ -74,3 +74,14 @@ class FaceRecognitionSystem:
         self.save_users_config(default_users)
         print("📋 Created default users configuration")
         return default_users
+    
+    def save_users_config(self, users=None):
+        if users is None:
+            users = self.users
+        
+        try:
+            with open(self.users_config, 'w') as f:
+                json.dump(users, f, indent=2)
+            print("💾 Users configuration saved")
+        except Exception as e:
+            print(f"❌ Error saving users config: {e}")
