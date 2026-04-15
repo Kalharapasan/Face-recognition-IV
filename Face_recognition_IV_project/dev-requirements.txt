@@ -1,10 +1,4 @@
-pytest
-setuptools
-wheel
-# TODO: update the necessary requirements to develop this package
-
-cv2
-numpy
-PIL
-json
-datetime
+-r requirements.txt
+pytest>=7.0
+setuptools>=65
+wheel>=0.38
