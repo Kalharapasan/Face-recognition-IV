@@ -253,3 +253,5 @@ class FaceRecognitionSystem:
                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
                 
                 cv2.imshow("✅ Processed Face", display_face)
+
+                
