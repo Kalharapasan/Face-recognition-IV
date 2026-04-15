@@ -352,4 +352,8 @@ class FaceRecognitionSystem:
         if failed_images > 0:
             print(f"⚠️ Failed to process {failed_images} images")
         
+        # Convert to numpy arrays
+        faces = np.array(faces)
+        labels = np.array(labels)
+
         
