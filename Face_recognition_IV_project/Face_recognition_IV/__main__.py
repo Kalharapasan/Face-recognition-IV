@@ -122,3 +122,9 @@ class FaceRecognitionSystem:
         else:
             print(f"❌ User ID {user_id} not found")
             return False
+
+# ============================================================================
+# STEP 4: FACE DETECTION
+# ============================================================================
+
+    
