@@ -86,4 +86,17 @@ class FaceRecognitionSystem:
         except Exception as e:
             print(f"❌ Error saving users config: {e}")
     
-    
+# ============================================================================
+# STEP 3: USER MANAGEMENT
+# ============================================================================
+
+    def add_user(self, user_id, name):
+        try:
+            user_id = str(user_id)
+            self.users[user_id] = name
+            self.save_users_config()
+            print(f"✅ Added user: {name} (ID: {user_id})")
+            return True
+        except Exception as e:
+            print(f"❌ Error adding user: {e}")
+            return False
