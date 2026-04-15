@@ -330,3 +330,16 @@ class FaceRecognitionSystem:
                     print(f"⚠️ Skipping {image_file}: Invalid filename format")
                     failed_images += 1
                     continue
+                # Add to training data
+                faces.append(face_np)
+                labels.append(user_id)
+                successful_images += 1
+                
+                # Show progress
+                if successful_images % 50 == 0:
+                    print(f"   📊 Processed {successful_images}/{len(image_files)} images")
+                
+            except Exception as e:
+                print(f"⚠️ Error processing {image_file}: {e}")
+                failed_images += 1
+                continue
