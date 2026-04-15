@@ -195,3 +195,11 @@ class FaceRecognitionSystem:
         print("  - Move your head slightly for different angles")
         print("  - Ensure good lighting")
         print("  - Press 'q' to quit early")
+        if str(user_id) not in self.users:
+            print(f"❌ User ID {user_id} not found. Please add user first.")
+            return False
+        
+        user_name = self.users[str(user_id)]
+        print(f"👤 Collecting data for: {user_name}")
+
+        
