@@ -343,3 +343,13 @@ class FaceRecognitionSystem:
                 print(f"⚠️ Error processing {image_file}: {e}")
                 failed_images += 1
                 continue
+            
+        if successful_images == 0:
+            print("❌ No valid training images found")
+            return False
+        
+        print(f"✅ Successfully processed {successful_images} images")
+        if failed_images > 0:
+            print(f"⚠️ Failed to process {failed_images} images")
+        
+        
