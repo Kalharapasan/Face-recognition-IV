@@ -100,3 +100,13 @@ class FaceRecognitionSystem:
         except Exception as e:
             print(f"❌ Error adding user: {e}")
             return False
+    
+    def list_users(self):
+        print("\n👥 REGISTERED USERS:")
+        print("-" * 30)
+        if len(self.users) == 0:
+            print("No users registered")
+        else:
+            for user_id, name in self.users.items():
+                print(f"  ID: {user_id} - Name: {name}")
+        print()
