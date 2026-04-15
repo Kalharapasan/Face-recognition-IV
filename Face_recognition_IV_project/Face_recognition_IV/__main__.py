@@ -111,4 +111,14 @@ class FaceRecognitionSystem:
                 print(f"  ID: {user_id} - Name: {name}")
         print()
     
-    
+    def remove_user(self, user_id):
+        user_id = str(user_id)
+        if user_id in self.users:
+            name = self.users[user_id]
+            del self.users[user_id]
+            self.save_users_config()
+            print(f"✅ Removed user: {name} (ID: {user_id})")
+            return True
+        else:
+            print(f"❌ User ID {user_id} not found")
+            return False
