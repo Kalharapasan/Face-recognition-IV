@@ -127,4 +127,22 @@ class FaceRecognitionSystem:
 # STEP 4: FACE DETECTION
 # ============================================================================
 
-    
+    def detect_face(self, img):
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        faces = self.face_classifier.detectMultiScale(
+            gray,
+            scaleFactor=1.3,
+            minNeighbors=5,
+            minSize=(30, 30)
+        )
+        
+        if len(faces) == 0:
+            return None
+        
+        # Return the largest face if multiple detected
+        if len(faces) > 1:
+            faces = sorted(faces, key=lambda x: x[2] * x[3], reverse=True)
+        
+        x, y, w, h = faces[0]
+        cropped_face = img[y:y+h, x:x+w]
+        return cropped_face
