@@ -182,3 +182,8 @@ class FaceRecognitionSystem:
         cap.release()
         cv2.destroyAllWindows()
         return True
+
+# ============================================================================
+# STEP 5: DATA COLLECTION FOR TRAINING
+# ============================================================================
+    
