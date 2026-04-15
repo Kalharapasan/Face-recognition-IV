@@ -68,4 +68,9 @@ class FaceRecognitionSystem:
                 return users
             except Exception as e:
                 print(f"⚠️ Error loading users config: {e}")
-    
+        
+
+        default_users = {"1": "User1"}
+        self.save_users_config(default_users)
+        print("📋 Created default users configuration")
+        return default_users
