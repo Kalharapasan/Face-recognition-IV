@@ -312,3 +312,21 @@ class FaceRecognitionSystem:
         
         successful_images = 0
         failed_images = 0
+
+        for image_file in image_files:
+            try:
+                # Load image
+                image_path = os.path.join(self.data_dir, image_file)
+                img = Image.open(image_path).convert('L')  # Convert to grayscale
+                
+                # Convert to numpy array
+                face_np = np.array(img, 'uint8')
+                
+                # Extract user ID from filename (user.ID.number.jpg)
+                parts = image_file.split('.')
+                if len(parts) >= 3:
+                    user_id = int(parts[1])
+                else:
+                    print(f"⚠️ Skipping {image_file}: Invalid filename format")
+                    failed_images += 1
+                    continue
