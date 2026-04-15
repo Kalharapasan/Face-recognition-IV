@@ -233,4 +233,23 @@ class FaceRecognitionSystem:
             # Show original frame
             cv2.imshow("📸 Data Collection - Camera Feed", display_frame)
 
+            # Detect and process face
+            cropped_face = self.detect_face(frame)
             
+            if cropped_face is not None:
+                img_count += 1
+                
+                # Resize to standard size
+                face_resized = cv2.resize(cropped_face, (200, 200))
+                face_gray = cv2.cvtColor(face_resized, cv2.COLOR_BGR2GRAY)
+                
+                # Save image
+                filename = f"{self.data_dir}/user.{user_id}.{img_count}.jpg"
+                cv2.imwrite(filename, face_gray)
+                
+                # Show processed face
+                display_face = face_gray.copy()
+                cv2.putText(display_face, f"Sample: {img_count}/{num_samples}", (10, 30),
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                
+                cv2.imshow("✅ Processed Face", display_face)
