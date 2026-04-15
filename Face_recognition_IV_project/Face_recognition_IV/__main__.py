@@ -267,3 +267,16 @@ class FaceRecognitionSystem:
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 print(f"⏹️ Collection stopped by user at {img_count} samples")
                 break
+
+        # Cleanup
+        cap.release()
+        cv2.destroyAllWindows()
+        
+        if img_count > 0:
+            print(f"✅ Data collection completed!")
+            print(f"📊 Collected {img_count} samples for {user_name}")
+            print(f"📁 Files saved in '{self.data_dir}' directory")
+            return True
+        else:
+            print("❌ No samples collected")
+            return False
