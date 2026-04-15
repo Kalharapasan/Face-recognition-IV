@@ -303,3 +303,12 @@ class FaceRecognitionSystem:
             return False
         
         print(f"📊 Found {len(image_files)} training images")
+
+        # Prepare training data
+        faces = []
+        labels = []
+        
+        print("📝 Processing training images...")
+        
+        successful_images = 0
+        failed_images = 0
