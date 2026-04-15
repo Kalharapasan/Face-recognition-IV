@@ -85,3 +85,5 @@ class FaceRecognitionSystem:
             print("💾 Users configuration saved")
         except Exception as e:
             print(f"❌ Error saving users config: {e}")
+    
+    
