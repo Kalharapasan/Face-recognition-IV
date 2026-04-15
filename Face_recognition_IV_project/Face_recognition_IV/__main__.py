@@ -280,3 +280,9 @@ class FaceRecognitionSystem:
         else:
             print("❌ No samples collected")
             return False
+        
+# ============================================================================
+# STEP 6: MODEL TRAINING
+# ============================================================================
+
+    
