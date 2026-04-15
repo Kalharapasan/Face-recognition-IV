@@ -356,4 +356,8 @@ class FaceRecognitionSystem:
         faces = np.array(faces)
         labels = np.array(labels)
 
+        # Show training summary
+        unique_users = len(set(labels))
+        print(f"👥 Training data for {unique_users} different users")
+
         
