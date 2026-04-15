@@ -254,4 +254,16 @@ class FaceRecognitionSystem:
                 
                 cv2.imshow("✅ Processed Face", display_face)
 
+                # Progress update
+                if img_count % 20 == 0:
+                    print(f"📊 Progress: {img_count}/{num_samples} samples collected")
                 
+                # Stop when target reached
+                if img_count >= num_samples:
+                    print(f"🎉 Target reached! Collected {img_count} samples")
+                    break
+            
+            # Check for quit
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                print(f"⏹️ Collection stopped by user at {img_count} samples")
+                break
