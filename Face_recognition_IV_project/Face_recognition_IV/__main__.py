@@ -59,3 +59,13 @@ class FaceRecognitionSystem:
                 os.makedirs(directory)
                 print(f"📁 Created directory: {directory}")
     
+    def load_users_config(self):
+        if os.path.exists(self.users_config):
+            try:
+                with open(self.users_config, 'r') as f:
+                    users = json.load(f)
+                print(f"📋 Loaded {len(users)} users from configuration")
+                return users
+            except Exception as e:
+                print(f"⚠️ Error loading users config: {e}")
+    
