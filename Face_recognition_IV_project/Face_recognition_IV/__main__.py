@@ -202,4 +202,7 @@ class FaceRecognitionSystem:
         user_name = self.users[str(user_id)]
         print(f"👤 Collecting data for: {user_name}")
 
-        
+        cap = cv2.VideoCapture(0)
+        if not cap.isOpened():
+            print("❌ Error: Cannot access camera")
+            return False
