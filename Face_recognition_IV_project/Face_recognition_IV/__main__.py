@@ -206,3 +206,9 @@ class FaceRecognitionSystem:
         if not cap.isOpened():
             print("❌ Error: Cannot access camera")
             return False
+        
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+        
+        img_count = 0
+        print("\n🎬 Data collection started!")
