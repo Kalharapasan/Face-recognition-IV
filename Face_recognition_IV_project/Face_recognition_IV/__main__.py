@@ -186,4 +186,4 @@ class FaceRecognitionSystem:
 # ============================================================================
 # STEP 5: DATA COLLECTION FOR TRAINING
 # ============================================================================
-    
+    def collect_training_data(self, user_id, num_samples=200):
