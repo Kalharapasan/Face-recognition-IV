@@ -2,3 +2,9 @@ pytest
 setuptools
 wheel
 # TODO: update the necessary requirements to develop this package
+
+cv2
+numpy
+PIL
+json
+datetime

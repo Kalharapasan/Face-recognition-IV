@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Package: Face_recognition_IV",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "Face_recognition_IV"
+        }
+    ]
+}
