@@ -187,3 +187,11 @@ class FaceRecognitionSystem:
 # STEP 5: DATA COLLECTION FOR TRAINING
 # ============================================================================
     def collect_training_data(self, user_id, num_samples=200):
+        print(f"📸 Starting data collection for User ID: {user_id}")
+        print(f"🎯 Target samples: {num_samples}")
+        print("\n💡 Instructions:")
+        print("  - Look directly at the camera")
+        print("  - Keep your face clearly visible")
+        print("  - Move your head slightly for different angles")
+        print("  - Ensure good lighting")
+        print("  - Press 'q' to quit early")
