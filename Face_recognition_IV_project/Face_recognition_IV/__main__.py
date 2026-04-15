@@ -285,4 +285,21 @@ class FaceRecognitionSystem:
 # STEP 6: MODEL TRAINING
 # ============================================================================
 
-    
+    def train_model(self):
+        print("🧠 Starting model training...")
+        
+        # Check if data directory exists
+        if not os.path.exists(self.data_dir):
+            print(f"❌ Data directory '{self.data_dir}' not found")
+            print("💡 Collect training data first")
+            return False
+        
+        # Get all training images
+        image_files = [f for f in os.listdir(self.data_dir) if f.endswith('.jpg')]
+        
+        if len(image_files) == 0:
+            print("❌ No training images found")
+            print("💡 Collect training data first")
+            return False
+        
+        print(f"📊 Found {len(image_files)} training images")
