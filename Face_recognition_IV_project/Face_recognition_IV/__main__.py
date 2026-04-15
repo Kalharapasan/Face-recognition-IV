@@ -212,3 +212,11 @@ class FaceRecognitionSystem:
         
         img_count = 0
         print("\n🎬 Data collection started!")
+
+        while True:
+            ret, frame = cap.read()
+            if not ret:
+                print("❌ Error: Cannot read frame")
+                break
+
+            
