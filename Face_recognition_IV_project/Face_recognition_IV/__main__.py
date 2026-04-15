@@ -360,4 +360,15 @@ class FaceRecognitionSystem:
         unique_users = len(set(labels))
         print(f"👥 Training data for {unique_users} different users")
 
+        # Count samples per user
+        user_counts = {}
+        for label in labels:
+            user_counts[label] = user_counts.get(label, 0) + 1
+        
+        print("📊 Samples per user:")
+        for user_id in sorted(user_counts.keys()):
+            count = user_counts[user_id]
+            name = self.users.get(str(user_id), f"User {user_id}")
+            print(f"   👤 {name} (ID: {user_id}): {count} samples")
+        
         
