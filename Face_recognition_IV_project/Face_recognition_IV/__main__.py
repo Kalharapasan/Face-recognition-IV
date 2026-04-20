@@ -451,6 +451,13 @@ class FaceRecognitionSystem:
                 display_frame = frame.copy()
 
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+                faces = self.face_classifier.detectMultiScale(
+                    gray,
+                    scaleFactor=1.2,
+                    minNeighbors=5,
+                    minSize=(50, 50)
+                )
         
         except KeyboardInterrupt:
             print("\n🛑 Recognition interrupted by user")
