@@ -840,6 +840,16 @@ def main():
                         continue
                     
                     system.list_users()
+                    try:
+                        user_id = input("Enter user ID for data collection: ").strip()
+                        if user_id not in system.users:
+                            print("❌ Invalid user ID")
+                            continue
+                    
+                    except ValueError:
+                        print("⚠️ Invalid input")
+                    except Exception as e:
+                        print(f"❌ Error: {e}")
             
             except KeyboardInterrupt:
                 print("\n\n🛑 Program interrupted by user")
