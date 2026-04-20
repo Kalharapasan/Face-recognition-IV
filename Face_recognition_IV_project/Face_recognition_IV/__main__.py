@@ -621,3 +621,46 @@ def display_menu():
     print("8. ❓ Help & Troubleshooting")
     print("9. 🚪 Exit")
     print("="*60)
+
+def user_management_menu(system):
+    while True:
+        print("\n👥 USER MANAGEMENT")
+        print("-" * 30)
+        print("1. 📋 List all users")
+        print("2. ➕ Add new user")
+        print("3. ❌ Remove user")
+        print("4. 🔙 Back to main menu")
+        
+        choice = input("\nSelect option (1-4): ").strip()
+        
+        if choice == '1':
+            system.list_users()
+        
+        elif choice == '2':
+            try:
+                user_id = input("Enter user ID (number): ").strip()
+                name = input("Enter user name: ").strip()
+                
+                if user_id and name:
+                    system.add_user(user_id, name)
+                else:
+                    print("⚠️ Both ID and name are required")
+            except Exception as e:
+                print(f"❌ Error: {e}")
+        
+        elif choice == '3':
+            system.list_users()
+            try:
+                user_id = input("Enter user ID to remove: ").strip()
+                if user_id:
+                    confirm = input(f"Are you sure you want to remove user {user_id}? (y/n): ").lower()
+                    if confirm == 'y':
+                        system.remove_user(user_id)
+            except Exception as e:
+                print(f"❌ Error: {e}")
+        
+        elif choice == '4':
+            break
+        
+        else:
+            print("⚠️ Invalid option")
