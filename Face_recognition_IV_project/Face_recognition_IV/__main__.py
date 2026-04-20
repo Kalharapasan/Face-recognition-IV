@@ -587,3 +587,11 @@ class FaceRecognitionSystem:
                     print(f"   👤 {name}: {count} samples")
         else:
             print("\n📸 No training data found")
+        
+        if os.path.exists(self.model_path):
+            model_size = os.path.getsize(self.model_path) / 1024
+            model_time = datetime.fromtimestamp(os.path.getmtime(self.model_path))
+            print(f"\n🤖 Trained model: {model_size:.1f} KB")
+            print(f"📅 Last trained: {model_time.strftime('%Y-%m-%d %H:%M:%S')}")
+        else:
+            print(f"\n🤖 No trained model found")
