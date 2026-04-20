@@ -859,6 +859,20 @@ def main():
                         print("⚠️ Invalid input")
                     except Exception as e:
                         print(f"❌ Error: {e}")
+                    
+                elif choice == '3':
+                    print("\n🧠 MODEL TRAINING")
+                    print("-" * 30)
+                    system.train_model()
+                
+                elif choice == '4':
+                    print("\n🔍 FACE RECOGNITION")
+                    print("-" * 30)
+                    
+                    if not os.path.exists(system.model_path):
+                        print("❌ No trained model found")
+                        print("💡 Train the model first")
+                        continue
             
             except KeyboardInterrupt:
                 print("\n\n🛑 Program interrupted by user")
