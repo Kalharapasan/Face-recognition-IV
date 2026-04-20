@@ -828,6 +828,18 @@ def main():
             display_menu()
             try:
                 choice = input("\nSelect option (1-9): ").strip()
+                if choice == '1':
+                    user_management_menu(system)
+                
+                elif choice == '2':
+                    print("\n📸 DATA COLLECTION")
+                    print("-" * 30)
+                    
+                    if len(system.users) == 0:
+                        print("❌ No users found. Add users first.")
+                        continue
+                    
+                    system.list_users()
             
             except KeyboardInterrupt:
                 print("\n\n🛑 Program interrupted by user")
