@@ -510,6 +510,8 @@ class FaceRecognitionSystem:
                 height = display_frame.shape[0]
                 cv2.putText(display_frame, "Controls: 'q'=quit, 's'=screenshot, 'c'=change confidence",
                            (10, height - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), 1)
+                
+                cv2.imshow("🔍 Face Recognition System", display_frame)
         
         except KeyboardInterrupt:
             print("\n🛑 Recognition interrupted by user")
