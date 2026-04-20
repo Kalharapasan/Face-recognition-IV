@@ -494,6 +494,18 @@ class FaceRecognitionSystem:
                         cv2.rectangle(display_frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
                         cv2.putText(display_frame, "ERROR", (x, y - 10),
                                    cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+                
+                info_y = 30
+                cv2.putText(display_frame, f"Faces detected: {len(faces)}", (10, info_y),
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
+                
+                info_y += 25
+                cv2.putText(display_frame, f"Confidence threshold: {confidence_threshold}%", (10, info_y),
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                
+                info_y += 25
+                cv2.putText(display_frame, f"Recognitions: {recognition_count}", (10, info_y),
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
         
         except KeyboardInterrupt:
             print("\n🛑 Recognition interrupted by user")
