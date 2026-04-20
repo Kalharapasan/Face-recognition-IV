@@ -676,3 +676,23 @@ def complete_workflow(system):
     print()
     
     input("Press Enter to start the workflow...")
+    
+    print("\n📝 STEP 1: USER MANAGEMENT")
+    print("-" * 40)
+    system.list_users()
+    
+    while True:
+        add_user = input("\nDo you want to add a new user? (y/n): ").lower()
+        if add_user != 'y':
+            break
+        
+        try:
+            user_id = input("Enter user ID (number): ").strip()
+            name = input("Enter user name: ").strip()
+            
+            if user_id and name:
+                system.add_user(user_id, name)
+            else:
+                print("⚠️ Both ID and name are required")
+        except Exception as e:
+            print(f"❌ Error: {e}")
