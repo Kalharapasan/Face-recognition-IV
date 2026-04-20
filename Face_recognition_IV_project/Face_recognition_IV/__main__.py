@@ -506,6 +506,10 @@ class FaceRecognitionSystem:
                 info_y += 25
                 cv2.putText(display_frame, f"Recognitions: {recognition_count}", (10, info_y),
                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                
+                height = display_frame.shape[0]
+                cv2.putText(display_frame, "Controls: 'q'=quit, 's'=screenshot, 'c'=change confidence",
+                           (10, height - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), 1)
         
         except KeyboardInterrupt:
             print("\n🛑 Recognition interrupted by user")
