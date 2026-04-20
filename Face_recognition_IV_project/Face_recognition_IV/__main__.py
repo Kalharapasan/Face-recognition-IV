@@ -521,6 +521,13 @@ class FaceRecognitionSystem:
                 if key == ord('q'):
                     print("\n🛑 Quitting face recognition...")
                     break
+
+                elif key == ord('s'):
+                    screenshot_count += 1
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    filename = f"{self.screenshots_dir}/recognition_{timestamp}_{screenshot_count}.jpg"
+                    cv2.imwrite(filename, display_frame)
+                    print(f"📸 Screenshot saved: {filename}")
         
         except KeyboardInterrupt:
             print("\n🛑 Recognition interrupted by user")
