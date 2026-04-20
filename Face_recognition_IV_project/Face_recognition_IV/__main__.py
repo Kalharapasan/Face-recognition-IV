@@ -547,3 +547,15 @@ class FaceRecognitionSystem:
         
         except Exception as e:
             print(f"\n❌ Unexpected error: {e}")
+        
+        finally:
+            cap.release()
+            cv2.destroyAllWindows()
+            
+            print(f"\n📊 RECOGNITION SESSION SUMMARY:")
+            print(f"   Total frames processed: {frame_count}")
+            print(f"   Successful recognitions: {recognition_count}")
+            print(f"   Screenshots saved: {screenshot_count}")
+            print("✅ Face recognition session completed!")
+        
+        return True
