@@ -824,6 +824,18 @@ def main():
     
     try:
         system = FaceRecognitionSystem()
+        while True:
+            display_menu()
+            try:
+                choice = input("\nSelect option (1-9): ").strip()
+            
+            except KeyboardInterrupt:
+                print("\n\n🛑 Program interrupted by user")
+                break
+            
+            except Exception as e:
+                print(f"\n❌ Unexpected error: {e}")
+                print("💡 Please try again or check the help section")
     
     except Exception as e:
         print(f"❌ Failed to initialize system: {e}")
