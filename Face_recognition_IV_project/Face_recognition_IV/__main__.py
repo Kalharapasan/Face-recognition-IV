@@ -478,6 +478,8 @@ class FaceRecognitionSystem:
                             color = (0, 0, 255)  # Red
                             label = "UNKNOWN"
                             status = f"Low confidence: {confidence}%"
+                        
+                        cv2.rectangle(display_frame, (x, y), (x + w, y + h), color, 2)
                     
                     except Exception as e:
                         print(f"⚠️ Error processing face: {e}")
