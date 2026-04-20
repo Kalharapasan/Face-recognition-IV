@@ -927,3 +927,15 @@ def main():
 # ============================================================================
 # PROGRAM ENTRY POINT
 # ============================================================================
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n\n👋 Program terminated by user")
+    except Exception as e:
+        print(f"\n❌ Fatal error: {e}")
+        print("💡 Please check your Python installation and requirements")   
+    finally:
+        cv2.destroyAllWindows()
+        print("\n🧹 Cleanup completed")
