@@ -429,4 +429,13 @@ class FaceRecognitionSystem:
             print("❌ Error: Cannot access camera")
             return False
 
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+        cap.set(cv2.CAP_PROP_FPS, 30)
         
+        print("✅ Camera opened successfully")
+        print("\n🎥 Face recognition started!")
+        
+        screenshot_count = 0
+        frame_count = 0
+        recognition_count = 0
