@@ -889,6 +889,28 @@ def main():
                     except ValueError:
                         print("⚠️ Invalid threshold. Using default")
                         system.start_recognition()
+                
+                elif choice == '5':
+                    system.show_system_status()
+                
+                elif choice == '6':
+                    print("\n🧪 CAMERA TEST")
+                    print("-" * 30)
+                    system.test_camera()
+                
+                elif choice == '7':
+                    complete_workflow(system)
+                
+                elif choice == '8':
+                    show_help()
+                
+                elif choice == '9':
+                    print("\n👋 Thank you for using Face Recognition System!")
+                    print("🔒 Goodbye!")
+                    break
+                
+                else:
+                    print("⚠️ Invalid option. Please try again.")
             
             except KeyboardInterrupt:
                 print("\n\n🛑 Program interrupted by user")
