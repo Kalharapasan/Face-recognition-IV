@@ -873,6 +873,14 @@ def main():
                         print("❌ No trained model found")
                         print("💡 Train the model first")
                         continue
+                    
+                    try:
+                        threshold = input("Confidence threshold (50-95, default 75): ").strip()
+                        threshold = int(threshold) if threshold else 75
+                    
+                    except ValueError:
+                        print("⚠️ Invalid threshold. Using default")
+                        system.start_recognition()
             
             except KeyboardInterrupt:
                 print("\n\n🛑 Program interrupted by user")
