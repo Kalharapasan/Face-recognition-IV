@@ -468,6 +468,16 @@ class FaceRecognitionSystem:
                         user_id, confidence_score = self.recognizer.predict(face_resized)
                         confidence = int(100 * (1 - confidence_score / 300))
                         confidence = max(0, min(100, confidence))
+                        if confidence >= confidence_threshold:
+                            user_name = self.users.get(str(user_id), f"User {user_id}")
+                            color = (0, 255, 0)  # Green
+                            label = f"{user_name}"
+                            status = f"Confidence: {confidence}%"
+                            recognition_count += 1
+                        else:
+                            color = (0, 0, 255)  # Red
+                            label = "UNKNOWN"
+                            status = f"Low confidence: {confidence}%"
                     
                     except Exception as e:
                         print(f"⚠️ Error processing face: {e}")
