@@ -813,3 +813,8 @@ def show_help():
 # ============================================================================
 # STEP 10: MAIN APPLICATION
 # ============================================================================
+
+def main():
+    print("🚀 FACE RECOGNITION SYSTEM")
+    print("="*50)
+    print("Initializing system...")
