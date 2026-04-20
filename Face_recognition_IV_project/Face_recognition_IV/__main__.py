@@ -573,3 +573,18 @@ class FaceRecognitionSystem:
         if os.path.exists(self.data_dir):
             files = [f for f in os.listdir(self.data_dir) if f.endswith('.jpg')]
             print(f"\n📸 Training images: {len(files)}")
+            if len(files) > 0:
+                # Count per user
+                user_counts = {}
+                for f in files:
+                    try:
+                        user_id = f.split('.')[1]
+                        user_counts[user_id] = user_counts.get(user_id, 0) + 1
+                    except:
+                        continue
+                
+                for user_id, count in user_counts.items():
+                    name = self.users.get(user_id, f"User {user_id}")
+                    print(f"   👤 {name}: {count} samples")
+        else:
+            print("\n📸 No training data found")
