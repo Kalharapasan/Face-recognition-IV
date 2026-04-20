@@ -512,6 +512,11 @@ class FaceRecognitionSystem:
                            (10, height - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), 1)
                 
                 cv2.imshow("🔍 Face Recognition System", display_frame)
+                key = cv2.waitKey(1) & 0xFF
+                
+                if key == ord('q'):
+                    print("\n🛑 Quitting face recognition...")
+                    break
         
         except KeyboardInterrupt:
             print("\n🛑 Recognition interrupted by user")
