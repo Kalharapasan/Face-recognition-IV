@@ -482,6 +482,8 @@ class FaceRecognitionSystem:
                         cv2.rectangle(display_frame, (x, y), (x + w, y + h), color, 2)
                         (text_width, text_height), _ = cv2.getTextSize(
                             label, cv2.FONT_HERSHEY_SIMPLEX, 0.9, 2)
+                        cv2.rectangle(display_frame, (x, y - 35),
+                                     (x + text_width, y), color, -1)
                     
                     except Exception as e:
                         print(f"⚠️ Error processing face: {e}")
