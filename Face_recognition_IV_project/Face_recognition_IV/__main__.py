@@ -480,6 +480,8 @@ class FaceRecognitionSystem:
                             status = f"Low confidence: {confidence}%"
                         
                         cv2.rectangle(display_frame, (x, y), (x + w, y + h), color, 2)
+                        (text_width, text_height), _ = cv2.getTextSize(
+                            label, cv2.FONT_HERSHEY_SIMPLEX, 0.9, 2)
                     
                     except Exception as e:
                         print(f"⚠️ Error processing face: {e}")
