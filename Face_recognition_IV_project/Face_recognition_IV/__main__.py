@@ -877,6 +877,14 @@ def main():
                     try:
                         threshold = input("Confidence threshold (50-95, default 75): ").strip()
                         threshold = int(threshold) if threshold else 75
+                        if not 50 <= threshold <= 95:
+                            print("⚠️ Invalid threshold. Using default (75)")
+                            threshold = 75
+                        
+                        print(f"\n🎥 Starting recognition with {threshold}% threshold")
+                        input("Press Enter to start...")
+                        
+                        system.start_recognition(threshold)
                     
                     except ValueError:
                         print("⚠️ Invalid threshold. Using default")
