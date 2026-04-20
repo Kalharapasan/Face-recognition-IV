@@ -517,6 +517,10 @@ class FaceRecognitionSystem:
                 if key == ord('q'):
                     print("\n🛑 Quitting face recognition...")
                     break
+
+                if key == ord('q'):
+                    print("\n🛑 Quitting face recognition...")
+                    break
         
         except KeyboardInterrupt:
             print("\n🛑 Recognition interrupted by user")
