@@ -408,3 +408,16 @@ class FaceRecognitionSystem:
         except Exception as e:
             print(f"❌ Error loading model: {e}")
             return False
+    
+    def start_recognition(self, confidence_threshold=75):
+        """
+        Start real-time face recognition
+        """
+        print(f"🔍 Starting face recognition...")
+        print(f"🎯 Confidence threshold: {confidence_threshold}%")
+        print("📹 Controls:")
+        print("   - Press 'q' to quit")
+        print("   - Press 's' to save screenshot")
+        print("   - Press 'c' to change confidence threshold")
+
+        
