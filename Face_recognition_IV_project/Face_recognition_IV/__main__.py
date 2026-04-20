@@ -730,3 +730,17 @@ def complete_workflow(system):
                 print("⚠️ Invalid number of samples")
             except Exception as e:
                 print(f"❌ Error during data collection: {e}")
+    
+    print("\n🧠 STEP 3: MODEL TRAINING")
+    print("-" * 40)
+    
+    train = input("Train the face recognition model now? (y/n): ").lower()
+    if train == 'y':
+        print("\n🔄 Starting model training...")
+        success = system.train_model()
+        
+        if success:
+            print("✅ Model training completed successfully!")
+        else:
+            print("❌ Model training failed")
+            return
