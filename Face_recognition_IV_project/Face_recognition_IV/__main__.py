@@ -818,3 +818,6 @@ def main():
     print("🚀 FACE RECOGNITION SYSTEM")
     print("="*50)
     print("Initializing system...")
+    if not check_libraries():
+        print("❌ Missing required libraries. Please install them and try again.")
+        return
