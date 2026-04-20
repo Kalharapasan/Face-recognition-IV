@@ -449,6 +449,8 @@ class FaceRecognitionSystem:
                 
                 frame_count += 1
                 display_frame = frame.copy()
+
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         
         except KeyboardInterrupt:
             print("\n🛑 Recognition interrupted by user")
