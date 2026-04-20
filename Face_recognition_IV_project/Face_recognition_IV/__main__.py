@@ -458,6 +458,10 @@ class FaceRecognitionSystem:
                     minNeighbors=5,
                     minSize=(50, 50)
                 )
+
+                for (x, y, w, h) in faces:
+                    # Extract face region
+                    face_roi = gray[y:y + h, x:x + w]
         
         except KeyboardInterrupt:
             print("\n🛑 Recognition interrupted by user")
