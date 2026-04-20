@@ -424,4 +424,9 @@ class FaceRecognitionSystem:
             if not self.load_model():
                 return False
         
+        cap = cv2.VideoCapture(0)
+        if not cap.isOpened():
+            print("❌ Error: Cannot access camera")
+            return False
+
         
