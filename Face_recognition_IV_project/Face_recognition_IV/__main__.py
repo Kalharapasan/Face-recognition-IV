@@ -606,3 +606,18 @@ class FaceRecognitionSystem:
 # ============================================================================
 # STEP 9: INTERACTIVE MENU SYSTEM
 # ============================================================================
+
+def display_menu():
+    print("\n" + "="*60)
+    print("🤖 FACE RECOGNITION SYSTEM - MAIN MENU")
+    print("="*60)
+    print("1. 👤 User Management")
+    print("2. 📸 Collect Training Data")
+    print("3. 🧠 Train Face Recognition Model")
+    print("4. 🔍 Start Face Recognition")
+    print("5. 📊 View System Status")
+    print("6. 🧪 Test Camera")
+    print("7. 🚀 Complete Setup Workflow (Recommended for first time)")
+    print("8. ❓ Help & Troubleshooting")
+    print("9. 🚪 Exit")
+    print("="*60)
