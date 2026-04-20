@@ -574,7 +574,6 @@ class FaceRecognitionSystem:
             files = [f for f in os.listdir(self.data_dir) if f.endswith('.jpg')]
             print(f"\n📸 Training images: {len(files)}")
             if len(files) > 0:
-                # Count per user
                 user_counts = {}
                 for f in files:
                     try:
