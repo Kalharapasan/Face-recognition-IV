@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 import os
 import json
+import re
 from datetime import datetime
 
 def check_libraries():
@@ -36,6 +37,7 @@ class FaceRecognitionSystem:
     def __init__(self):
         self.data_dir = "data"
         self.model_path = "face_recognizer_model.xml"
+        self.label_map_path = "label_map.json"
         self.users_config = "users.json"
         self.screenshots_dir = "screenshots"
         
@@ -44,6 +46,8 @@ class FaceRecognitionSystem:
         )
         
         self.recognizer = None
+        self.user_to_label = {}
+        self.label_to_user = {}
 
         self.create_directories()
         
@@ -295,7 +299,7 @@ class FaceRecognitionSystem:
             return False
         
         # Get all training images
-        image_files = [f for f in os.listdir(self.data_dir) if f.endswith('.jpg')]
+        image_files = sorted([f for f in os.listdir(self.data_dir) if f.endswith('.jpg')])
         
         if len(image_files) == 0:
             print("❌ No training images found")
@@ -307,11 +311,14 @@ class FaceRecognitionSystem:
         # Prepare training data
         faces = []
         labels = []
+        per_user_faces = {}
         
         print("📝 Processing training images...")
         
         successful_images = 0
         failed_images = 0
+
+        filename_pattern = re.compile(r"^user\.(\d+)\.(\d+)\.jpg$")
 
         for image_file in image_files:
             try:
@@ -323,16 +330,16 @@ class FaceRecognitionSystem:
                 face_np = np.array(img, 'uint8')
                 
                 # Extract user ID from filename (user.ID.number.jpg)
-                parts = image_file.split('.')
-                if len(parts) >= 3:
-                    user_id = int(parts[1])
-                else:
+                match = filename_pattern.match(image_file)
+                if not match:
                     print(f"⚠️ Skipping {image_file}: Invalid filename format")
                     failed_images += 1
                     continue
+                user_id = match.group(1)
                 # Add to training data
-                faces.append(face_np)
-                labels.append(user_id)
+                if user_id not in per_user_faces:
+                    per_user_faces[user_id] = []
+                per_user_faces[user_id].append(face_np)
                 successful_images += 1
                 
                 # Show progress
@@ -352,24 +359,45 @@ class FaceRecognitionSystem:
         if failed_images > 0:
             print(f"⚠️ Failed to process {failed_images} images")
         
+        # Build a stable mapping: user ID string -> numeric label used by OpenCV
+        sorted_user_ids = sorted(per_user_faces.keys(), key=lambda uid: int(uid))
+        self.user_to_label = {user_id: idx + 1 for idx, user_id in enumerate(sorted_user_ids)}
+        self.label_to_user = {str(label): user_id for user_id, label in self.user_to_label.items()}
+
+        for user_id in sorted_user_ids:
+            label = self.user_to_label[user_id]
+            user_faces = per_user_faces[user_id]
+            faces.extend(user_faces)
+            labels.extend([label] * len(user_faces))
+
         # Convert to numpy arrays
         faces = np.array(faces)
-        labels = np.array(labels)
+        labels = np.array(labels, dtype=np.int32)
 
         # Show training summary
-        unique_users = len(set(labels))
+        unique_users = len(sorted_user_ids)
         print(f"👥 Training data for {unique_users} different users")
 
         # Count samples per user
         user_counts = {}
-        for label in labels:
-            user_counts[label] = user_counts.get(label, 0) + 1
+        for user_id in sorted_user_ids:
+            user_counts[user_id] = len(per_user_faces[user_id])
         
         print("📊 Samples per user:")
-        for user_id in sorted(user_counts.keys()):
+        for user_id in sorted(user_counts.keys(), key=lambda uid: int(uid)):
             count = user_counts[user_id]
-            name = self.users.get(str(user_id), f"User {user_id}")
+            name = self.users.get(user_id, f"User {user_id}")
             print(f"   👤 {name} (ID: {user_id}): {count} samples")
+
+        if unique_users < 2:
+            print("⚠️ Only one user found in training data.")
+            print("   The model cannot distinguish between multiple people with single-user training.")
+
+        max_count = max(user_counts.values())
+        min_count = min(user_counts.values())
+        if min_count > 0 and (max_count / min_count) > 3:
+            print("⚠️ Training data is imbalanced between users.")
+            print("   Collect a similar number of samples per user for better recognition accuracy.")
         
         # Create and train the recognizer
         print("🔄 Training LBPH Face Recognizer...")
@@ -379,9 +407,17 @@ class FaceRecognitionSystem:
 
         # Save the trained model
         self.recognizer.write(self.model_path)
+
+        # Persist label mapping to avoid ID mismatches (e.g., "001" vs numeric label)
+        with open(self.label_map_path, 'w') as f:
+            json.dump({
+                "user_to_label": self.user_to_label,
+                "label_to_user": self.label_to_user
+            }, f, indent=2)
         
         print(f"✅ Model training completed successfully!")
         print(f"💾 Model saved as: {self.model_path}")
+        print(f"🗂️ Label map saved as: {self.label_map_path}")
         
         # Show model file info
         model_size = os.path.getsize(self.model_path) / 1024  # KB
@@ -403,6 +439,17 @@ class FaceRecognitionSystem:
         try:
             self.recognizer = cv2.face.LBPHFaceRecognizer_create()
             self.recognizer.read(self.model_path)
+
+            if os.path.exists(self.label_map_path):
+                with open(self.label_map_path, 'r') as f:
+                    label_data = json.load(f)
+                self.user_to_label = label_data.get("user_to_label", {})
+                self.label_to_user = label_data.get("label_to_user", {})
+            else:
+                # Backward compatibility for older models without label map file
+                self.user_to_label = {}
+                self.label_to_user = {}
+
             print("✅ Model loaded successfully")
             return True
         except Exception as e:
@@ -465,11 +512,13 @@ class FaceRecognitionSystem:
 
                     try:
                         face_resized = cv2.resize(face_roi, (200, 200))
-                        user_id, confidence_score = self.recognizer.predict(face_resized)
+                        predicted_label, confidence_score = self.recognizer.predict(face_resized)
+
+                        mapped_user_id = self.label_to_user.get(str(predicted_label), str(predicted_label))
                         confidence = int(100 * (1 - confidence_score / 300))
                         confidence = max(0, min(100, confidence))
                         if confidence >= confidence_threshold:
-                            user_name = self.users.get(str(user_id), f"User {user_id}")
+                            user_name = self.users.get(str(mapped_user_id), f"User {mapped_user_id}")
                             color = (0, 255, 0)  # Green
                             label = f"{user_name}"
                             status = f"Confidence: {confidence}%"
