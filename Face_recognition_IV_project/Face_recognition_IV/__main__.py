@@ -567,3 +567,6 @@ class FaceRecognitionSystem:
     def show_system_status(self):
         print("\n📊 SYSTEM STATUS")
         print("=" * 50)
+        print(f"👥 Registered users: {len(self.users)}")
+        for user_id, name in self.users.items():
+            print(f"   ID {user_id}: {name}")
