@@ -439,3 +439,19 @@ class FaceRecognitionSystem:
         screenshot_count = 0
         frame_count = 0
         recognition_count = 0
+
+        try:
+            while True:
+                ret, frame = cap.read()
+                if not ret:
+                    print("❌ Error: Cannot read frame")
+                    break
+                
+                frame_count += 1
+                display_frame = frame.copy()
+        
+        except KeyboardInterrupt:
+            print("\n🛑 Recognition interrupted by user")
+        
+        except Exception as e:
+            print(f"\n❌ Unexpected error: {e}")
