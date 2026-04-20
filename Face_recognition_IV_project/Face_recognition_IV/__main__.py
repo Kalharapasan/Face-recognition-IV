@@ -392,3 +392,19 @@ class FaceRecognitionSystem:
 # ============================================================================
 # STEP 7: FACE RECOGNITION
 # ============================================================================
+
+    def load_model(self):
+        """Load the trained model"""
+        if not os.path.exists(self.model_path):
+            print(f"❌ Model file '{self.model_path}' not found")
+            print("💡 Train the model first")
+            return False
+        
+        try:
+            self.recognizer = cv2.face.LBPHFaceRecognizer_create()
+            self.recognizer.read(self.model_path)
+            print("✅ Model loaded successfully")
+            return True
+        except Exception as e:
+            print(f"❌ Error loading model: {e}")
+            return False
