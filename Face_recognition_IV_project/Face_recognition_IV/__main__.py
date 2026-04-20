@@ -696,3 +696,37 @@ def complete_workflow(system):
                 print("⚠️ Both ID and name are required")
         except Exception as e:
             print(f"❌ Error: {e}")
+    
+    print("\n📸 STEP 2: DATA COLLECTION")
+    print("-" * 40)
+    
+    if len(system.users) == 0:
+        print("❌ No users available for data collection")
+        print("💡 Add users first")
+        return
+    
+    system.list_users()
+    
+    for user_id in system.users.keys():
+        user_name = system.users[user_id]
+        collect = input(f"\nCollect data for {user_name} (ID: {user_id})? (y/n): ").lower()
+        
+        if collect == 'y':
+            try:
+                samples = input("Number of samples (default 100): ").strip()
+                samples = int(samples) if samples else 100
+                
+                print(f"\n🎬 Starting data collection for {user_name}")
+                print("💡 Position yourself in front of the camera")
+                input("Press Enter when ready...")
+                
+                success = system.collect_training_data(user_id, samples)
+                if success:
+                    print(f"✅ Data collection completed for {user_name}")
+                else:
+                    print(f"❌ Data collection failed for {user_name}")
+                    
+            except ValueError:
+                print("⚠️ Invalid number of samples")
+            except Exception as e:
+                print(f"❌ Error during data collection: {e}")
