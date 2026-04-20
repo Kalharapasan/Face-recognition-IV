@@ -570,3 +570,6 @@ class FaceRecognitionSystem:
         print(f"👥 Registered users: {len(self.users)}")
         for user_id, name in self.users.items():
             print(f"   ID {user_id}: {name}")
+        if os.path.exists(self.data_dir):
+            files = [f for f in os.listdir(self.data_dir) if f.endswith('.jpg')]
+            print(f"\n📸 Training images: {len(files)}")
