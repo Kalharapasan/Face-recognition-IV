@@ -821,3 +821,6 @@ def main():
     if not check_libraries():
         print("❌ Missing required libraries. Please install them and try again.")
         return
+    
+    try:
+        system = FaceRecognitionSystem()
