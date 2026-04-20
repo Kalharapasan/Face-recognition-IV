@@ -420,4 +420,8 @@ class FaceRecognitionSystem:
         print("   - Press 's' to save screenshot")
         print("   - Press 'c' to change confidence threshold")
 
+        if self.recognizer is None:
+            if not self.load_model():
+                return False
+        
         
