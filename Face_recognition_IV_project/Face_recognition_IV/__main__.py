@@ -595,3 +595,10 @@ class FaceRecognitionSystem:
             print(f"📅 Last trained: {model_time.strftime('%Y-%m-%d %H:%M:%S')}")
         else:
             print(f"\n🤖 No trained model found")
+            
+        print(f"\n📁 Data directory: {self.data_dir}")
+        print(f"📁 Screenshots directory: {self.screenshots_dir}")
+        print(f"📄 Users config: {self.users_config}")
+        print(f"📄 Model file: {self.model_path}")
+        
+        print("=" * 50)
