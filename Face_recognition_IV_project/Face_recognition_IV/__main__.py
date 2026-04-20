@@ -563,3 +563,7 @@ class FaceRecognitionSystem:
 # ============================================================================
 # STEP 8: SYSTEM STATUS AND UTILITIES
 # ============================================================================
+
+    def show_system_status(self):
+        print("\n📊 SYSTEM STATUS")
+        print("=" * 50)
