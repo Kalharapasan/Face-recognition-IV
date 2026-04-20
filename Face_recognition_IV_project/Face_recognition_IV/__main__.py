@@ -809,3 +809,7 @@ def show_help():
     print("   - NumPy (pip install numpy)")
     print("   - Pillow (pip install Pillow)")
     print("   - Working camera/webcam")
+
+# ============================================================================
+# STEP 10: MAIN APPLICATION
+# ============================================================================
