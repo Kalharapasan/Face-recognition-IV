@@ -744,3 +744,17 @@ def complete_workflow(system):
         else:
             print("❌ Model training failed")
             return
+    
+    print("\n🔍 STEP 4: TEST FACE RECOGNITION")
+    print("-" * 40)
+    
+    test = input("Test face recognition now? (y/n): ").lower()
+    if test == 'y':
+        print("\n🎥 Starting face recognition test...")
+        print("💡 This will open the camera for real-time recognition")
+        input("Press Enter when ready...")
+        
+        system.start_recognition()
+    
+    print("\n🎉 WORKFLOW COMPLETED!")
+    print("✅ Your face recognition system is now ready to use")
