@@ -466,6 +466,8 @@ class FaceRecognitionSystem:
                     try:
                         face_resized = cv2.resize(face_roi, (200, 200))
                         user_id, confidence_score = self.recognizer.predict(face_resized)
+                        confidence = int(100 * (1 - confidence_score / 300))
+                        confidence = max(0, min(100, confidence))
                     
                     except Exception as e:
                         print(f"⚠️ Error processing face: {e}")
