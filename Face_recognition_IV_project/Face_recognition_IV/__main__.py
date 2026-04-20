@@ -845,6 +845,15 @@ def main():
                         if user_id not in system.users:
                             print("❌ Invalid user ID")
                             continue
+
+                        samples = input("Number of samples (default 200): ").strip()
+                        samples = int(samples) if samples else 200
+                        
+                        print(f"\n📋 Collecting {samples} samples for user {user_id}")
+                        print("💡 Position yourself in front of the camera")
+                        input("Press Enter to start...")
+                        
+                        system.collect_training_data(user_id, samples)
                     
                     except ValueError:
                         print("⚠️ Invalid input")
