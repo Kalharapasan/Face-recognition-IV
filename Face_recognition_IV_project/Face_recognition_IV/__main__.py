@@ -528,6 +528,19 @@ class FaceRecognitionSystem:
                     filename = f"{self.screenshots_dir}/recognition_{timestamp}_{screenshot_count}.jpg"
                     cv2.imwrite(filename, display_frame)
                     print(f"📸 Screenshot saved: {filename}")
+                
+                elif key == ord('c'):
+                    print(f"\n🎯 Current confidence threshold: {confidence_threshold}%")
+                    try:
+                        new_threshold = input("Enter new threshold (50-95): ")
+                        new_threshold = int(new_threshold)
+                        if 50 <= new_threshold <= 95:
+                            confidence_threshold = new_threshold
+                            print(f"✅ Confidence threshold changed to: {confidence_threshold}%")
+                        else:
+                            print("⚠️ Invalid range. Keep current value.")
+                    except ValueError:
+                        print("⚠️ Invalid input. Keep current value.")
         
         except KeyboardInterrupt:
             print("\n🛑 Recognition interrupted by user")
