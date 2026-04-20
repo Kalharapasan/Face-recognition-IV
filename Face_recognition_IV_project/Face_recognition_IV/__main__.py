@@ -923,3 +923,7 @@ def main():
     except Exception as e:
         print(f"❌ Failed to initialize system: {e}")
         print("💡 Check if all requirements are installed")
+
+# ============================================================================
+# PROGRAM ENTRY POINT
+# ============================================================================
